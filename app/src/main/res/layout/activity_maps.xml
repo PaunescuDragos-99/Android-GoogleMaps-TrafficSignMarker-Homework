@@ -16,19 +16,13 @@
         tools:context=".MapsActivity"
         tools:layout="@android:layout/expandable_list_content" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/newmarker"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/newmarker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:onClick="NewMarker"
-            android:text="@string/new_marker"
-            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,UsingOnClickInXml" />
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:minHeight="20dp"
+        android:onClick="NewMarkerActivity"
+        android:text="@string/new_marker"
+        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,UsingOnClickInXml" />
 
 </LinearLayout>

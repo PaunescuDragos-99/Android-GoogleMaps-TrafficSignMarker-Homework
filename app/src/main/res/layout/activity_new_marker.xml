@@ -4,27 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewMarker">
+    tools:context=".NewMarkerActivity">
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="NewMarker"
+        android:layout_marginStart="7dp"
+        android:layout_marginBottom="40dp"
         android:text="Send"
-        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
-        tools:layout_editor_absoluteY="512dp" />
+        android:onClick="ThirdActivity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/editTextMain" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="0dp"
+        android:id="@+id/editTextMain"
+        android:layout_width="283dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="24dp"
         android:layout_marginBottom="40dp"
         android:ems="10"
-        android:hint="Enter your message here"
+        android:hint="Write the message here"
         android:inputType="textLongMessage"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonActivity3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3rd Activity"
+        android:onClick="ThirdActivity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

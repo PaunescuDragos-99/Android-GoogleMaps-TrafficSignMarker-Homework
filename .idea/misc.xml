@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Dragos/HomeworkAndroid/app/src/main/res/layout/activity_maps.xml" value="0.25" />
-        <entry key="..\:/Users/Dragos/HomeworkAndroid/app/src/main/res/layout/activity_new_marker.xml" value="0.25" />
+        <entry key="..\:/Users/Dragos/HomeworkAndroid/app/src/main/res/layout/activity_maps.xml" value="0.18" />
+        <entry key="..\:/Users/Dragos/HomeworkAndroid/app/src/main/res/layout/activity_new_marker.xml" value="0.22" />
+        <entry key="..\:/Users/Dragos/HomeworkAndroid/app/src/main/res/layout/activity_third.xml" value="0.1" />
       </map>
     </option>
   </component>

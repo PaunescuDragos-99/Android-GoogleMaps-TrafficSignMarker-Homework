@@ -1,5 +1,7 @@
 package com.example.homeworkandroid;
 
+import static androidx.core.content.PackageManagerCompat.LOG_TAG;
+
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
@@ -24,9 +26,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ActivityMapsBinding binding;
     private static final String LOG_TAG =
             MapsActivity.class.getSimpleName();
-    public static final String EXTRA_MESSAGE =
-            "com.example.android.homeworkandroid.extra.MESSAGE";
-    private EditText mMessageEditText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
 
+
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions()
@@ -79,9 +80,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.getUiSettings().setZoomControlsEnabled(true);
     }
 
-    public void NewMarker(View view) {
+    public void NewMarkerActivity(View view) {
         Log.d(LOG_TAG, "Button clicked!");
-        Intent intent = new Intent(this, NewMarker.class);
+        Intent intent = new Intent(this, NewMarkerActivity.class);
         startActivity(intent);
+
     }
+
 }

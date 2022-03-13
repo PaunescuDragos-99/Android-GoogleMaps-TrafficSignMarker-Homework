@@ -10,12 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HomeworkAndroid">
         <activity
-            android:name=".NewMarker"
+            android:name=".ThirdActivity"
+            android:label="Third Activity"
+            android:parentActivityName=".NewMarkerActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.homeworkandroid.NewMarkerActivity" />
+        </activity>
+        <activity
+            android:name=".NewMarkerActivity"
             android:label="New Marker"
             android:parentActivityName=".MapsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.homeworkandroid.MapsActivity"/>
+                android:value="com.example.homeworkandroid.MapsActivity" />
         </activity>
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
