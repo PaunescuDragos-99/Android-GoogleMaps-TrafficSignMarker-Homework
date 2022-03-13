@@ -81,10 +81,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void NewMarkerActivity(View view) {
-        Log.d(LOG_TAG, "Button clicked!");
         Intent intent = new Intent(this, NewMarkerActivity.class);
         startActivity(intent);
 
     }
+
 
 }
