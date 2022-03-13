@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">HomeworkAndroid</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="new_marker">New Marker</string>
+</resources>
