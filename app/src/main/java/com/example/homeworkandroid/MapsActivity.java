@@ -86,5 +86,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    public void NewMarker (View view) {
+        LatLng australia = new LatLng(-50, 151);
+        mMap.addMarker(new MarkerOptions()
+                .position(australia)
+                .title("Marker in Sydney")
+                .draggable(true));
+    }
+
 
 }
