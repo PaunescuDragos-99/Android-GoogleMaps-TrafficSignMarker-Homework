@@ -99,7 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .position(australia)
                 .title("Marker in Sydney")
                 .draggable(true));
-
+        Intent intent = new Intent(this, NewMarkerActivity.class);
     }
 
     public boolean onMarkerClick(final Marker marker) {
