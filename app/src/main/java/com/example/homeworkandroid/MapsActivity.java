@@ -41,6 +41,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        Toast.makeText(MapsActivity.this,"Firebase connection succes",Toast.LENGTH_LONG)
+                .show();
     }
 
     /**
