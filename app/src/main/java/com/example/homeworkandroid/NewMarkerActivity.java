@@ -69,12 +69,8 @@ public class NewMarkerActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Marker marker = dataSnapshot.getValue(Marker.class);
-
-
                     markerList.add(marker);
-                    reff2 = FirebaseDatabase.getInstance().getReference().child("Marker").push();
-                    String key = reff2.getKey();
-                    Log.d("Post Key" , key);
+                    Log.d("Post Key" , marker.getMarkerName());
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -85,7 +81,6 @@ public class NewMarkerActivity extends AppCompatActivity {
 
             }
         });
-
 
 
     }

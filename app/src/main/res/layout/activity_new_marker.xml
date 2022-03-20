@@ -19,18 +19,6 @@
         app:layout_constraintTop_toBottomOf="@+id/markerList"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/btnEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="16dp"
-        android:text="+"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/markerList" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/markerList"
         android:layout_width="409dp"
@@ -48,5 +36,16 @@
         android:text="Key"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/btnAddMarker"
+        android:layout_width="75dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="12dp"
+        android:onClick="ThirdActivity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/imagine_android_113x113" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

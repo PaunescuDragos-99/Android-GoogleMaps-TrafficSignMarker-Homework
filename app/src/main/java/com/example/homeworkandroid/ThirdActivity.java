@@ -26,7 +26,7 @@ public class ThirdActivity extends AppCompatActivity {
     EditText txtMarkerName, txtMarkerInfo;
     Button btnSave;
     DatabaseReference reff;
-    Marker marker = new Marker();
+    Marker marker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

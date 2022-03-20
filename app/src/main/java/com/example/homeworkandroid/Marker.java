@@ -4,7 +4,8 @@ public class Marker {
 private String MarkerName;
 private String MarkerInfo;
 
-    public Marker() {
+    public Marker(){
+
     }
 
     public String getMarkerName() {
