@@ -37,7 +37,6 @@ public class NewMarkerActivity extends AppCompatActivity {
     String Key;
 
     DatabaseReference reff;
-    DatabaseReference reff2;
     MyAdapter adapter;
 
 
