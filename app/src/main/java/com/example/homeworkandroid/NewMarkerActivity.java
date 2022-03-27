@@ -67,6 +67,7 @@ public class NewMarkerActivity extends AppCompatActivity {
                     Marker marker = dataSnapshot.getValue(Marker.class);
                     markerList.add(marker);
                     marker.setMarkerKey(dataSnapshot.getKey());
+                    keyList.add(dataSnapshot.getKey());
 
 
                 }
