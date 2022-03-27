@@ -34,7 +34,6 @@ public class NewMarkerActivity extends AppCompatActivity {
     private static final String TAG = "MainMarkers";
     RecyclerView recyclerView;
     ArrayList<Marker> markerList;
-    ArrayList<String> keyList;
     String Key;
 
     DatabaseReference reff;
@@ -53,7 +52,6 @@ public class NewMarkerActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        keyList = new ArrayList<>();
         markerList = new ArrayList<>();
         adapter = new MyAdapter(this,markerList);
         recyclerView.setAdapter(adapter);
@@ -67,8 +65,6 @@ public class NewMarkerActivity extends AppCompatActivity {
                     Marker marker = dataSnapshot.getValue(Marker.class);
                     markerList.add(marker);
                     marker.setMarkerKey(dataSnapshot.getKey());
-                    keyList.add(dataSnapshot.getKey());
-
 
                 }
                 adapter.notifyDataSetChanged();
