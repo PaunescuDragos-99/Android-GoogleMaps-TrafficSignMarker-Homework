@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ThirdActivity extends AppCompatActivity {
 
@@ -32,22 +33,23 @@ public class ThirdActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
-        txtMarkerName=findViewById(R.id.txtMarkerName);
-        txtMarkerInfo=findViewById(R.id.txtMarkerInfo);
-        btnSave=findViewById(R.id.btnSave);
+        txtMarkerName = findViewById(R.id.txtMarkerName);
+        txtMarkerInfo = findViewById(R.id.txtMarkerInfo);
+        btnSave = findViewById(R.id.btnSave);
         marker = new Marker();
         reff = FirebaseDatabase.getInstance().getReference().child("Marker");
         btnSave.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 marker.setMarkerName(txtMarkerName.getText().toString().trim());
                 marker.setMarkerInfo(txtMarkerInfo.getText().toString().trim());
 
                 reff.push().setValue(marker);
-                Toast.makeText(ThirdActivity.this, "Okey",Toast.LENGTH_LONG).show();
+                Toast.makeText(ThirdActivity.this, "Okey", Toast.LENGTH_LONG).show();
             }
         });
 
-    }
 
+    }
 }

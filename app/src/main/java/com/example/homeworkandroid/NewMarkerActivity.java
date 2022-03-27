@@ -1,6 +1,5 @@
 package com.example.homeworkandroid;
 
-import static androidx.core.content.PackageManagerCompat.LOG_TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,11 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.google.android.gms.common.internal.Constants;
 import com.google.firebase.database.ChildEventListener;
@@ -31,15 +27,14 @@ import java.util.Map;
 public class NewMarkerActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.example.android.homeworkandroid.extra.MESSAGE";
-    private EditText mMessageEditText;
     public static final int TEXT_REQUEST = 1;
-    private TextView mReplyHeadTextView;
-    private TextView mReplyTextView;
+
 
 
     private static final String TAG = "MainMarkers";
     RecyclerView recyclerView;
     ArrayList<Marker> markerList;
+    ArrayList<String> keyList;
     String Key;
 
     DatabaseReference reff;
@@ -58,7 +53,7 @@ public class NewMarkerActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-
+        keyList = new ArrayList<>();
         markerList = new ArrayList<>();
         adapter = new MyAdapter(this,markerList);
         recyclerView.setAdapter(adapter);
@@ -67,10 +62,13 @@ public class NewMarkerActivity extends AppCompatActivity {
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                markerList.clear();
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Marker marker = dataSnapshot.getValue(Marker.class);
                     markerList.add(marker);
-                    Log.d("Post Key" , marker.getMarkerName());
+                    marker.setMarkerKey(dataSnapshot.getKey());
+
+
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -84,9 +82,6 @@ public class NewMarkerActivity extends AppCompatActivity {
 
 
     }
-
-
-
 
 
     public void ThirdActivity(View view) {

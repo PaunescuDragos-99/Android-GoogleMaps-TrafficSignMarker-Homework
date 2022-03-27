@@ -25,6 +25,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.homeworkandroid.MapsActivity" />
         </activity>
+        <activity
+            android:name=".MarkerEdit"
+            android:label="Marker Edit"
+            android:parentActivityName=".NewMarkerActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.homeworkandroid.NewMarkerActivity" />
+        </activity>
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
