@@ -69,6 +69,7 @@ public class NewMarkerActivity extends AppCompatActivity {
                     marker.setMarkerKey(dataSnapshot.getKey());
                     keyList.add(dataSnapshot.getKey());
 
+
                 }
                 adapter.notifyDataSetChanged();
             }
