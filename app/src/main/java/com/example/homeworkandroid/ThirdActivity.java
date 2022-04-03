@@ -1,21 +1,15 @@
 package com.example.homeworkandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ThirdActivity extends AppCompatActivity {
 
@@ -27,7 +21,7 @@ public class ThirdActivity extends AppCompatActivity {
     EditText txtMarkerName, txtMarkerInfo;
     Button btnSave;
     DatabaseReference reff;
-    Marker marker;
+    MarkerModel marker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +30,7 @@ public class ThirdActivity extends AppCompatActivity {
         txtMarkerName = findViewById(R.id.txtMarkerName);
         txtMarkerInfo = findViewById(R.id.txtMarkerInfo);
         btnSave = findViewById(R.id.btnSave);
-        marker = new Marker();
+        marker = new MarkerModel();
         reff = FirebaseDatabase.getInstance().getReference().child("Marker");
         btnSave.setOnClickListener(new View.OnClickListener() {
 

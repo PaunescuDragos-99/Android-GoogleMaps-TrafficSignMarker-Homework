@@ -11,17 +11,13 @@ import android.os.Bundle;
 import android.view.View;
 
 
-import com.google.android.gms.common.internal.Constants;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 
 public class NewMarkerActivity extends AppCompatActivity {
@@ -33,7 +29,8 @@ public class NewMarkerActivity extends AppCompatActivity {
 
     private static final String TAG = "MainMarkers";
     RecyclerView recyclerView;
-    ArrayList<Marker> markerList;
+
+    ArrayList<MarkerModel> markerList;
     String Key;
 
     DatabaseReference reff;
@@ -61,9 +58,11 @@ public class NewMarkerActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 markerList.clear();
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    Marker marker = dataSnapshot.getValue(Marker.class);
+                    MarkerModel marker = dataSnapshot.getValue(MarkerModel.class);
                     markerList.add(marker);
                     marker.setMarkerKey(dataSnapshot.getKey());
+
+
 
                 }
                 adapter.notifyDataSetChanged();

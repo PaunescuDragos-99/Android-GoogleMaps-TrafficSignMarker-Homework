@@ -2,11 +2,9 @@ package com.example.homeworkandroid;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,10 +20,10 @@ import java.util.ArrayList;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context context;
-    ArrayList<Marker> list;
+    ArrayList<MarkerModel> list;
 
 
-    public MyAdapter(Context context, ArrayList<Marker> list) {
+    public MyAdapter(Context context, ArrayList<MarkerModel> list) {
         this.context = context;
         this.list = list;
     }
@@ -40,7 +38,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Marker marker = list.get(position);
+        MarkerModel marker = list.get(position);
 
         String newKey = marker.getMarkerKey();
         holder.MarkerName.setText(marker.getMarkerName());

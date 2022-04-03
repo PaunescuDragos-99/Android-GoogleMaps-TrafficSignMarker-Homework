@@ -4,7 +4,7 @@ import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
 
-public class Marker implements Serializable {
+public class MarkerModel implements Serializable {
 private String MarkerName;
 private String MarkerInfo;
 
@@ -14,7 +14,7 @@ private String MarkerKey;
 
 
 
-    public Marker(){
+    public MarkerModel(){
 
     }
 
