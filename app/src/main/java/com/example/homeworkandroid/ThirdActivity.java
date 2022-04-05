@@ -2,6 +2,7 @@ package com.example.homeworkandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,7 @@ public class ThirdActivity extends AppCompatActivity {
     private EditText mReply;
 
 
-    EditText txtMarkerName, txtMarkerInfo;
+    EditText txtMarkerName, txtMarkerInfo, txtMarkerLatitude, txtMarkerLongitude;
     Button btnSave;
     DatabaseReference reff;
     MarkerModel marker;
@@ -29,6 +30,15 @@ public class ThirdActivity extends AppCompatActivity {
         setContentView(R.layout.activity_third);
         txtMarkerName = findViewById(R.id.txtMarkerName);
         txtMarkerInfo = findViewById(R.id.txtMarkerInfo);
+        txtMarkerLatitude = findViewById(R.id.txtMarkerLatitude);
+        txtMarkerLongitude = findViewById(R.id.txtMarkerLongitude);
+        Intent intent = getIntent();
+
+       String latitude = intent.getStringExtra("Latitude");
+       String longitude = intent.getStringExtra("Longitude");
+
+       txtMarkerLatitude.setText(latitude);
+       txtMarkerLongitude.setText(longitude);
         btnSave = findViewById(R.id.btnSave);
         marker = new MarkerModel();
         reff = FirebaseDatabase.getInstance().getReference().child("Marker");
@@ -38,6 +48,8 @@ public class ThirdActivity extends AppCompatActivity {
             public void onClick(View view) {
                 marker.setMarkerName(txtMarkerName.getText().toString().trim());
                 marker.setMarkerInfo(txtMarkerInfo.getText().toString().trim());
+                marker.setMarkerLatitude(txtMarkerLatitude.getText().toString().trim());
+                marker.setMarkerLongitude(txtMarkerLongitude.getText().toString().trim());
 
                 reff.push().setValue(marker);
                 Toast.makeText(ThirdActivity.this, "Okey", Toast.LENGTH_LONG).show();

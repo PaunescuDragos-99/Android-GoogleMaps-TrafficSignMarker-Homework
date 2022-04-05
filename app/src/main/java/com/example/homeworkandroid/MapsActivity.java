@@ -33,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import java.util.Map;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -118,20 +119,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        reff.addValueEventListener(new ValueEventListener() {
+
+       reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 markerAddList = new ArrayList<>();
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    MarkerModel markerModels = dataSnapshot.getValue(MarkerModel.class);
-                    markerAddList.add(markerModels);
-                    String Name = markerModels.getMarkerName();
-                    String Info = markerModels.getMarkerInfo();
-                    NewMarker(Name,Info);
+                if(snapshot.exists()) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        MarkerModel markerModels = dataSnapshot.getValue(MarkerModel.class);
+                        markerAddList.add(markerModels);
+                        String Name = markerModels.getMarkerName();
+                        String Info = markerModels.getMarkerInfo();
+                        String Latitude = markerModels.getMarkerLatitude();
+                        String Longitude = markerModels.getMarkerLongitude();
+                        NewMarker(Name, Info, Latitude, Longitude);
 
+                    }
                 }
-                Log.d(LOG_TAG,"Marker 1 este:" +  markerAddList.get(0).getMarkerName());
-
 
                 //String Name = markerAddList.get(0).getMarkerName();
                 //String Info = markerAddList.get(2).getMarkerInfo();
@@ -143,6 +147,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
+
+
+        //Setare marker pe harta, luand latitudinea si longitudinea.
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
+            public void onMapClick(LatLng point){
+
+                Intent intent = new Intent(MapsActivity.this,ThirdActivity.class);
+                String latitude = String.valueOf(point.latitude);
+                String longitude = String.valueOf(point.longitude);
+                intent.putExtra("Latitude",latitude);
+                intent.putExtra("Longitude",longitude);
+                Toast.makeText(MapsActivity.this,
+                        latitude + ", " + longitude,
+                        Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        });
+
+
 
 
 
@@ -202,15 +225,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-    public void NewMarker (String Name, String Info) {
+    public void NewMarker (String Name, String Info,String Latitude, String Longitude) {
 
-        LatLng australia = new LatLng(-50, 151);
+        Double latitude = Double.valueOf(Latitude);
+        Double longitude = Double.valueOf(Longitude);
+        LatLng australia = new LatLng(latitude, longitude);
         mMap.addMarker(new MarkerOptions()
                 .position(australia)
                 .title(Name)
                 .snippet(Info)
                 .draggable(true));
     }
+
+
+
 
     /**public boolean onMarkerClick(final Marker marker) {
 
