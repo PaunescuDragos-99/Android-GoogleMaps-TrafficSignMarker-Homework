@@ -38,7 +38,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
-            android:text="TextView"
+            android:text=" "
             android:textColor="@color/white"
             android:textSize="15dp" />
 

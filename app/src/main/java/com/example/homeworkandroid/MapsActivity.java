@@ -73,7 +73,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-        RetrieveData.execute(count);
+        //RetrieveData.execute(count);
 
 
 
@@ -118,6 +118,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.getUiSettings().setZoomControlsEnabled(true);
+        RetrieveData.execute(count);
 
 
        reff.addValueEventListener(new ValueEventListener() {
