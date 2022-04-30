@@ -48,6 +48,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -305,6 +307,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .snippet(Info)
                 .draggable(true)
                 .icon(BitmapDescriptorFactory.fromResource(resID)));
+        CircleOptions circly = new CircleOptions()
+                .radius(2)
+                .center(australia);
+        Circle circle = mMap.addCircle(circly);
     }
 
 
