@@ -23,14 +23,26 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
+        android:layout_marginEnd="49dp"
         android:minHeight="20dp"
         android:onClick="NewMarkerActivity"
         android:text="@string/new_marker"
         tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,UsingOnClickInXml" />
 
+    <Button
+        android:id="@+id/MyLocation"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="22dp"
+        android:layout_toStartOf="@+id/newmarker"
+        android:minHeight="20dp"
+        android:text="My location."
+        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,UsingOnClickInXml" />
 
-        <TextView
+    <TextView
             android:id="@+id/asyncTask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

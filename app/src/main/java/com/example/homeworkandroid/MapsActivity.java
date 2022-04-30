@@ -3,19 +3,45 @@ package com.example.homeworkandroid;
 import static androidx.core.content.PackageManagerCompat.LOG_TAG;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.location.LocationRequest;
 import android.nfc.Tag;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -25,12 +51,17 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.homeworkandroid.databinding.ActivityMapsBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.Permission;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -49,12 +80,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     DatabaseReference reff;
     int count = 0;
     private retrieveData RetrieveData;
+    private LocationListener locationListener;
+    private LocationRequest locationRequest;
+    private FusedLocationProviderClient fusedLocationClient;
 
+    Button myLocation;
+    Location location1;
+    LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         reff = FirebaseDatabase.getInstance().getReference("Marker");
 
@@ -68,16 +104,52 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        Toast.makeText(MapsActivity.this,"Firebase connection succes",Toast.LENGTH_LONG)
+        Toast.makeText(MapsActivity.this, "Firebase connection succes", Toast.LENGTH_LONG)
                 .show();
 
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(MapsActivity.this);
+
+
+
+        myLocation = findViewById(R.id.MyLocation);
+        myLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyLocation();
+            }
+        });
+
 
         //RetrieveData.execute(count);
-
-
-
     }
+
+    public void MyLocation(){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){
+                 return;
+        }
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            Log.d(LOG_TAG," :"+ location.getLongitude());
+                            Intent intent = new Intent(MapsActivity.this, ThirdActivity.class);
+                            String latitude = String.valueOf(location.getLatitude());
+                            String longitude = String.valueOf(location.getLongitude());
+                            intent.putExtra("Latitude", latitude);
+                            intent.putExtra("Longitude", longitude);
+                            startActivity(intent);
+
+                        }
+                    }
+                });
+    }
+
+
 
     /**
      * Manipulates the map once available.
@@ -121,11 +193,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         RetrieveData.execute(count);
 
 
-       reff.addValueEventListener(new ValueEventListener() {
+        reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 markerAddList = new ArrayList<>();
-                if(snapshot.exists()) {
+                if (snapshot.exists()) {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         MarkerModel markerModels = dataSnapshot.getValue(MarkerModel.class);
                         markerAddList.add(markerModels);
@@ -143,6 +215,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //NewMarker(Name, Info);
 
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -151,24 +224,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //Setare marker pe harta, luand latitudinea si longitudinea.
-        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
-            public void onMapClick(LatLng point){
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            public void onMapClick(LatLng point) {
 
-                Intent intent = new Intent(MapsActivity.this,ThirdActivity.class);
+                Intent intent = new Intent(MapsActivity.this, ThirdActivity.class);
                 String latitude = String.valueOf(point.latitude);
                 String longitude = String.valueOf(point.longitude);
-                intent.putExtra("Latitude",latitude);
-                intent.putExtra("Longitude",longitude);
+                intent.putExtra("Latitude", latitude);
+                intent.putExtra("Longitude", longitude);
                 Toast.makeText(MapsActivity.this,
                         latitude + ", " + longitude,
                         Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
-
-
-
-
 
 
     }
@@ -180,7 +249,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    private class retrieveData extends AsyncTask<Integer,Integer, Integer> {
+    private class retrieveData extends AsyncTask<Integer, Integer, Integer> {
 
         private int customInt;
 
@@ -210,23 +279,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            textViewAsync.setText(""+values[0]);
+            textViewAsync.setText("" + values[0]);
         }
 
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            textViewAsync.setText(""+integer);
+            textViewAsync.setText("" + integer);
             count = integer;
 
 
         }
     }
 
-
-
-
-    public void NewMarker (String Name, String Info,String Latitude, String Longitude) {
+    public void NewMarker(String Name, String Info, String Latitude, String Longitude) {
 
         Double latitude = Double.valueOf(Latitude);
         Double longitude = Double.valueOf(Longitude);
@@ -237,7 +303,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .snippet(Info)
                 .draggable(true));
     }
-
 
 
 
