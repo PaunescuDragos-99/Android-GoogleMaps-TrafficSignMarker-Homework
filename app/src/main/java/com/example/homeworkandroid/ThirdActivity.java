@@ -13,14 +13,17 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class ThirdActivity extends AppCompatActivity {
+public class ThirdActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     public static final String EXTRA_REPLY =
             "com.example.android.twoactivities.extra.REPLY";
@@ -55,6 +58,11 @@ public class ThirdActivity extends AppCompatActivity {
        String latitude = intent.getStringExtra("Latitude");
        String longitude = intent.getStringExtra("Longitude");
 
+       Spinner spinner = findViewById(R.id.spinner1);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.indicatoare, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
        txtMarkerLatitude.setText(latitude);
        txtMarkerLongitude.setText(longitude);
         btnSave = findViewById(R.id.btnSave);
@@ -130,4 +138,35 @@ public class ThirdActivity extends AppCompatActivity {
         return notifyBuilder;
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String text = adapterView.getItemAtPosition(i).toString();
+        Toast.makeText(ThirdActivity.this, "NR i:"+i, Toast.LENGTH_SHORT).show();
+        if(i == 0){
+            marker.setMarkerIndicator("indicator_prioritate");
+        }else
+            if(i == 1){
+            marker.setMarkerIndicator("indicator_stop");
+        }else
+            if(i == 2){
+            marker.setMarkerIndicator("indicator_cedeaza");
+        }else
+            if(i == 3){
+            marker.setMarkerIndicator("indicator_interzis");
+        }else
+            if(i == 4){
+            marker.setMarkerIndicator("indicator_inainte");
+        }else
+            if(i == 5){
+            marker.setMarkerIndicator("indicator_dreapta");
+        }else
+            if(i == 6){
+            marker.setMarkerIndicator("indicator_stanga");
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }

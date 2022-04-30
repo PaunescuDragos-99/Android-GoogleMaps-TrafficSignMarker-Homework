@@ -46,6 +46,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -143,7 +145,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             intent.putExtra("Latitude", latitude);
                             intent.putExtra("Longitude", longitude);
                             startActivity(intent);
-
                         }
                     }
                 });
@@ -179,17 +180,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
 
+
+
+
+
+
         textViewAsync = findViewById(R.id.asyncTask);
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        markerSef = mMap.addMarker(new MarkerOptions()
-                .position(sydney)
-                .title("Marker in Sydney")
-                .draggable(true));
-        markerSef.setTag(0);
-
+        LatLng sydney = new LatLng(45.3087283, 23.821645);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.getUiSettings().setZoomControlsEnabled(true);
+
         RetrieveData.execute(count);
 
 
@@ -205,7 +206,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String Info = markerModels.getMarkerInfo();
                         String Latitude = markerModels.getMarkerLatitude();
                         String Longitude = markerModels.getMarkerLongitude();
-                        NewMarker(Name, Info, Latitude, Longitude);
+                        String Indicator = markerModels.getMarkerIndicator();
+                        NewMarker(Name, Info, Latitude, Longitude, Indicator);
 
                     }
                 }
@@ -291,17 +293,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
     }
-
-    public void NewMarker(String Name, String Info, String Latitude, String Longitude) {
-
+    public void NewMarker(String Name, String Info, String Latitude, String Longitude,String Indicator) {
         Double latitude = Double.valueOf(Latitude);
         Double longitude = Double.valueOf(Longitude);
+        String mDrawableName = Indicator;
+        int resID = getResources().getIdentifier(mDrawableName , "drawable", getPackageName());
         LatLng australia = new LatLng(latitude, longitude);
         mMap.addMarker(new MarkerOptions()
                 .position(australia)
                 .title(Name)
                 .snippet(Info)
-                .draggable(true));
+                .draggable(true)
+                .icon(BitmapDescriptorFactory.fromResource(resID)));
     }
 
 

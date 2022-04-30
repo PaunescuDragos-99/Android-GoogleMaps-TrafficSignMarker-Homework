@@ -11,6 +11,7 @@ private String MarkerLatitude;
 private String MarkerLongitude;
 
 private String MarkerLocation;
+private String MarkerIndicator;
 @Exclude
 private String MarkerKey;
 
@@ -60,6 +61,14 @@ private String MarkerKey;
 
     public void setMarkerLocation(String markerLocation) {
         MarkerLocation = markerLocation;
+    }
+
+    public String getMarkerIndicator() {
+        return MarkerIndicator;
+    }
+
+    public void setMarkerIndicator(String markerIndicator) {
+        MarkerIndicator = markerIndicator;
     }
 
     public String getMarkerKey() {
