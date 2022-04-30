@@ -253,12 +253,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+
     private class retrieveData extends AsyncTask<Integer, Integer, Integer> {
 
         private int customInt;
-
         @Override
         protected void onPreExecute() {
+
+
             super.onPreExecute();
             customInt = 0;
         }
