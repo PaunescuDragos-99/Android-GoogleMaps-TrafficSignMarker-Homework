@@ -249,6 +249,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void NewMarkerActivity(View view) {
         Intent intent = new Intent(this, NewMarkerActivity.class);
         startActivity(intent);
+
     }
 
 
