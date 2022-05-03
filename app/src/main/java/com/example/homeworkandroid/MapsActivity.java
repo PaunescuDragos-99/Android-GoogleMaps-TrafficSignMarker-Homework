@@ -17,6 +17,7 @@ import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -311,7 +312,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .icon(BitmapDescriptorFactory.fromResource(resID)));
         CircleOptions circly = new CircleOptions()
                 .radius(2)
-                .center(australia);
+                .center(australia)
+                .strokeColor(Color.BLUE);
         Circle circle = mMap.addCircle(circly);
     }
 
