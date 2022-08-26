@@ -18,3 +18,5 @@ Pagina de editare indicator curent:
 Pagina cu indicatoarele prezente pe harta:
 
 ![listaMarkere](https://user-images.githubusercontent.com/80251617/186926359-eb8c11af-d5bd-43ce-81f9-3b68f57dfa41.jpg)
+ 
+ 
